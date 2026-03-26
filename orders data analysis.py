@@ -1,29 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[76]:
-
-
-#import libraries
-#!pip install kaggle
-import kaggle
-
-!kaggle datasets download ankitbansal06/retail-orders -f orders.csv
-
-
-# In[77]:
-
-
-#extract file from zip file
-import zipfile
-zip_ref = zipfile.ZipFile('orders.csv.zip') 
-zip_ref.extractall() # extract file to dir
-zip_ref.close() # close file
-
-
-# In[145]:
-
-
 #read data from the file and handle null values
 import pandas as pd
 df = pd.read_csv('orders.csv',na_values=['Not Available','unknown'])
@@ -65,18 +39,23 @@ df.drop(columns=['list_price','cost_price','discount_percent'],inplace=True)
 
 
 # In[169]:
-
+pip install psycopg2-binary
 
 #load the data into sql server using replace option
 import sqlalchemy as sal
-engine = sal.create_engine('mssql://ANKIT\SQLEXPRESS/master?driver=ODBC+DRIVER+17+FOR+SQL+SERVER')
-conn=engine.connect()
+
+engine = sal.create_engine(
+    'postgresql+psycopg2://postgres:aryasqlpassword@localhost:5432/python_sql_project'
+)
+
+conn = engine.connect()
+print("Connected successfully!")
 
 
 # In[172]:
 
 
 #load the data into sql server using append option
-df.to_sql('df_orders', con=conn , index=False, if_exists = 'append')
+df.to_sql('df_orders', con=conn, index=False, if_exists='replace')
 
 

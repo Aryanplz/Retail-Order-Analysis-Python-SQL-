@@ -160,9 +160,3 @@ pip install pandas sqlalchemy
 Give it a ⭐ on GitHub — it helps a lot!
 
 ---
-
-If you want next upgrade 🚀
-I can:
-✅ Write **perfect resume bullet points (short + powerful)**
-✅ Give **interview questions from THIS project**
-✅ Suggest **what project you should build next to get job faster**
